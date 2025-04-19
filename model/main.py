@@ -15,7 +15,6 @@ from google import genai
 import sys
 
 # Download required NLTK data silently
-nltk.download('all')
 
 class DocumentProcessor:
     def __init__(self, input_file=None, gemini_api=None):

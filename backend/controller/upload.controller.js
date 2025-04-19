@@ -6,11 +6,18 @@ import { spawn } from "child_process";
 // Promise-based function to handle Python script execution
 function sendToPython(inputData) {
   return new Promise((resolve, reject) => {
-    const scriptPath = path.join(process.cwd(), "model", "main.py");
+    const scriptPath = path.join(process.cwd(), "..", "model", "main.py");
+
 
     // Use Python from your virtual environment
-    const pythonPath = path.join(process.cwd(), "myenv", "Scripts", "python.exe"); 
-    
+    const pythonPath = path.join(
+      process.cwd(),
+      "..",
+      "model",
+      "myenv",
+      "Scripts",
+      "python.exe"
+    );
 
     const python = spawn(pythonPath, [scriptPath]);
 
