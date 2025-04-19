@@ -4,7 +4,6 @@ import bcrypt from "bcryptjs";
 import { User } from "../model/user.model.js";
 import { ApiError } from "../utilities/ApiError.js";
 import { ApiResponse } from "../utilities/ApiResponse.js";
-import fs from "fs-extra";
 import { PDFDocument } from "pdf-lib";
 import path from "path";
 
