@@ -5,7 +5,7 @@ const PasswordInput = ({
   name,
   placeholder,
   onChange,
-  required = false,
+  required,
   minLength = 6,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,11 +14,19 @@ const PasswordInput = ({
 
   const handleInputChange = (e) => {
     const newValue = e.target.value;
-    setValue(newValue);
+    if (isValid(newValue)) {
+      setValue(newValue);
+    }
     onChange(e); // pass back to parent
   };
 
-  const isValid = value.length >= minLength;
+  const isValid = (value) => {
+    if (value.length >= minLength) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <div className="relative w-fit">
@@ -30,7 +38,7 @@ const PasswordInput = ({
         onBlur={() => setTouched(true)}
         required={required}
         className={`border p-2 m-2 rounded-lg pr-20 ${
-          touched && !isValid ? "border-red-500" : "border-black"
+          touched && !isValid(value) ? "border-red-500" : "border-black"
         }`}
       />
 
@@ -44,7 +52,7 @@ const PasswordInput = ({
       </span>
 
       {/* Error message */}
-      {touched && !isValid && (
+      {touched && !isValid(value) && (
         <div className="text-red-600 font-semibold ml-2 mt-1 text-sm">
           Password must be at least {minLength} characters long.
         </div>

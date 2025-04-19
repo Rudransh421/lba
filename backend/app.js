@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 
 import cors from "cors";
 
+import { errorHandler } from "./middleware/errorHandler.middleware.js";
+
 const app = e();
 
 app.use(
@@ -23,5 +25,6 @@ app.use(cookieParser());
 import userRouter from "./routes/user.routes.js";
 
 app.use("/user", userRouter);
+app.use(errorHandler)
 
 export { app };

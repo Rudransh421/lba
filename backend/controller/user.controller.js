@@ -36,6 +36,19 @@ const registerUser = async (req, res) => {
       return res.status(400).json(new ApiError(400, "All fields are required"));
     }
 
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res
+        .status(400)
+        .json(new ApiError(400, "Please provide a valid email address"));
+    }
+    
+
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json(new ApiError(400, "Password must be 6 character long"));
+    }
+
     const userExist = await User.findOne({ email });
 
     if (userExist) {
@@ -72,6 +85,19 @@ const loginUser = async (req, res) => {
 
     if (!email || !password) {
       return res.status(400).json(new ApiError(400, "All fields are required"));
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res
+        .status(400)
+        .json(new ApiError(400, "Please provide a valid email address"));
+    }
+    
+
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json(new ApiError(400, "Password must be 6 character long"));
     }
 
     const existUser = await User.findOne({ email });
@@ -134,10 +160,13 @@ const sendPasswordResetLink = async (req, res) => {
 
     // Step 1: Check if email is present in the request body
     const { email } = req.body;
-    if (!email) {
-      console.error("❌ Error: Email is missing in request body");
-      return res.status(400).json(new ApiError(400, "Email is required"));
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res
+        .status(400)
+        .json(new ApiError(400, "Please provide a valid email address"));
     }
+    
     console.log(`✅ Email received: ${email}`);
 
     // Step 2: Find the user in the database
@@ -260,6 +289,13 @@ const changePassword = async (req, res) => {
         );
     }
 
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res
+        .status(400)
+        .json(new ApiError(400, "Please provide a valid email address"));
+    }
+    
+
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -288,7 +324,6 @@ const changePassword = async (req, res) => {
     return res.status(500).json(new ApiError(500, "Internal Server Error"));
   }
 };
-
 
 export {
   registerUser,

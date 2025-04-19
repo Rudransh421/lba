@@ -34,8 +34,10 @@ const Signup = () => {
         navigate("/login");
       }
     } catch (error) {
-      console.error("Signup failed", error);
-      setErrorMessage("Something went wrong. Please try again.");
+      const backendMessage = error.response?.data?.message;
+      console.log(error.response)
+      console.log(backendMessage)
+      setErrorMessage(backendMessage || "Something went wrong.");
     }
   };
 

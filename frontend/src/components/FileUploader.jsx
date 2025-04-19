@@ -87,15 +87,23 @@ const FileUploader = () => {
   return (
     <div className="container">
       <div className="role-input-container">
-        <label htmlFor="role">Enter Your Desired Role:</label>
-        <input
-          type="text"
+        <label htmlFor="role">Select Your Desired Role:</label>
+        <select
           id="role"
           value={role}
           onChange={(e) => setRole(e.target.value)}
-          placeholder="e.g., Frontend Developer"
           className="role-input"
-        />
+        >
+          <option value="">-- Select a Role --</option>
+          <option value="UX/UI Designer">UX/UI Designer</option>
+          <option value="Product Manager">Product Manager</option>
+          <option value="DevOps Engineer">DevOps Engineer</option>
+          <option value="Software Engineer">Software Engineer</option>
+          <option value="Data Engineer">Data Engineer</option>
+          <option value="Web Developer">Web Developer</option>
+          <option value="Data Scientist">Data Scientist</option>
+          <option value="AI/ML Developer">AI/ML Developer</option>
+        </select>
       </div>
 
       {/* 🔁 MODIFIED: show only if role and upload are done */}
