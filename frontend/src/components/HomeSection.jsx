@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./HomeSection.css";
-import aiResumeImage from "../assets/ai-resume.png"; // Ensure this image exists in assets
+import aiResumeImage from "../assets/resume-report.png"; // Make sure this image exists in your project
 
 const HomeSection = () => {
   const text =
@@ -12,29 +12,44 @@ const HomeSection = () => {
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
-      if (index < text.length) {
+      if (index < text.length - 1) {
         setDisplayedText((prev) => prev + text[index]);
         index++;
-      } else {
-        clearInterval(interval);
-        setAnimationClass("glow"); // Adds glow effect after text completes
       }
-    }, 40); // Adjust speed of animation
-
+    }, 40);
     return () => clearInterval(interval);
   }, []);
 
+  const features = [
+    "AI-Powered Resume Analysis",
+    "Real-Time Suggestions",
+    "Highlights Strengths & Weaknesses",
+    "ATS Optimization",
+    "Professional Formatting Tips",
+    "Tailored for Job Roles",
+  ];
+
   return (
     <div className="homesection">
-      <div className="image-container">
-        <img src={aiResumeImage} alt="AI Resume Review" />
+      <div className="top-section">
+        <div className="text-container">
+          <p className={animationClass}>{displayedText}</p>
+        </div>
+
+        <div className="image-container">
+          <img src={aiResumeImage} alt="AI Resume Review" />
+        </div>
       </div>
 
-      {/* Vertical Line */}
-      <div className="divider"></div>
-
-      <div className="text-container">
-        <p className={animationClass}>{displayedText}</p>
+      {/* Feature Slider */}
+      <div className="features-slider-container">
+        <div className="features-slider">
+          {features.concat(features).map((feature, index) => (
+            <div className="feature-box" key={index}>
+              <span>{feature}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

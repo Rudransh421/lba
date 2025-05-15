@@ -1,11 +1,10 @@
-/* Page Styling */
 body {
-  background-color: #f0f8ff;
+  background-color: #F7F9FB;
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #202124;
 }
 
-/* Centered Container */
 .container {
   display: flex;
   justify-content: center;
@@ -15,12 +14,11 @@ body {
   transition: all 0.5s ease-in-out;
 }
 
-/* Upload Box */
 .upload-box {
   width: 350px;
   height: 350px;
-  border: 3px dashed #007bff;
-  background-color: #f8f9ff;
+  border: 3px dashed #1A2A49;
+  background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,25 +27,23 @@ body {
   border-radius: 15px;
   position: relative;
   transition: transform 0.5s ease-in-out, background 0.3s;
-  box-shadow: 0 5px 15px rgba(0, 0, 255, 0.1);
-  overflow-x: auto;
+  box-shadow: 0 5px 15px rgba(26, 42, 73, 0.1);
 }
 
 .upload-box:hover {
-  background-color: #e6f0ff;
+  background-color: #F0F4F8;
 }
 
-/* Move left when uploading */
 .upload-box.move-left {
   transform: translateX(-50px);
 }
 
-/* File Input */
+
+
 #file-input {
   display: none;
 }
 
-/* File Upload Label */
 .file-label {
   display: flex;
   flex-direction: column;
@@ -55,7 +51,7 @@ body {
   cursor: pointer;
   font-size: 18px;
   font-weight: bold;
-  color: #007bff;
+  color: #1A2A49;
   transition: transform 0.2s;
 }
 
@@ -63,69 +59,63 @@ body {
   transform: scale(1.05);
 }
 
-/* Large Plus Sign */
 .plus {
   font-size: 90px;
   font-weight: bold;
-  color: #0056b3;
+  color: #1A2A49;
   margin-bottom: 10px;
 }
 
-/* Larger File Icon */
 .file-icon {
   font-size: 50px;
   margin-bottom: 5px;
-  color: #007bff;
+  color: #1A2A49;
 }
 
-/* File Name */
 .file-name {
   font-size: 16px;
-  color: #333;
+  color: #202124;
   font-weight: bold;
   margin-top: 5px;
 }
 
-/* Upload Button */
 .upload-btn {
   margin-top: 10px;
   padding: 12px 25px;
   font-size: 18px;
   font-weight: bold;
   border: none;
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  background: linear-gradient(135deg, #1A2A49, #007bff);
   color: white;
   cursor: pointer;
   border-radius: 50px;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0px 4px 10px rgba(0, 0, 255, 0.3);
+  box-shadow: 0px 4px 10px rgba(26, 42, 73, 0.3);
 }
 
 .upload-btn:hover {
-  background: linear-gradient(135deg, #0056b3, #003d80);
+  background: linear-gradient(135deg, #2C3E65, #3D517D);
   transform: scale(1.05);
-  box-shadow: 0px 6px 15px rgba(0, 0, 255, 0.4);
+  box-shadow: 0px 6px 15px rgba(26, 42, 73, 0.4);
 }
 
 .upload-btn:disabled {
-  background: gray;
+  background: #B0BEC5;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* Upload Another File Button */
 .reset-btn {
-  background: linear-gradient(135deg, #28a745, #1e7e34);
+  background: linear-gradient(135deg, #00C48C, #00A77F);
 }
 
 .reset-btn:hover {
-  background: linear-gradient(135deg, #1e7e34, #155d27);
+  background: linear-gradient(135deg, #00A77F, #00896C);
 }
 
-/* Upload Steps */
 .upload-steps {
   font-size: 18px;
-  color: #333;
+  color: #202124;
   display: none;
   flex-direction: column;
   gap: 10px;
@@ -137,64 +127,103 @@ body {
   display: flex;
 }
 
-/* Completed Step */
 .completed {
-  color: green;
+  color: #00C48C;
   font-weight: bold;
 }
 
-/* Success Message */
 .success {
-  font-size: 24px; /* Increased size */
+  font-size: 24px;
   font-weight: bold;
-  color: green; /* Green color */
+  color: #00C48C;
   margin-top: 10px;
 }
 
 .role-input-container {
-  margin: 1rem 0; /* Already using rem */
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.role-input-container.move-left {
+  transform: translateX(-50px);
+  transition: transform 0.5s ease-in-out;
+}
+
+
+.role-input-container label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #1A2A49, #0077fb);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.role-input-container label:hover {
+  transform: scale(1.05);
 }
 
 .role-input {
-  padding: 0.5rem; /* Use rem instead of px for padding */
-  font-size: 1rem; /* Already using rem */
-  border-radius: 0.375rem; /* 6px => 0.375rem (16px base font-size) */
-  border: 0.0625rem solid #ccc; /* 1px => 0.0625rem */
-  margin-top: 0.25rem; /* 4px => 0.25rem */
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #f0f4f8, #e0e8f9);
+  border: 2px solid #B0BEC5;
+  border-radius: 30px;
+  width: 280px;
+  color: #1A2A49;
+  box-shadow: 0 2px 8px rgba(26, 42, 73, 0.1);
+  transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg fill='%231A2A49' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+}
+
+.role-input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+}
+
+.role-input option {
+  background-color: #ffffff;
+  color: #1A2A49;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.role-input option:hover,
+.role-input option:focus {
+  background-color: #e8f0fe;
+  color: #007bff;
 }
 
 
 
-.close-error {
-  position: absolute;
-  top: 6px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 18px;
-  color: #721c24;
-  cursor: pointer;
-  line-height: 1;
-}
 
-
-/* Shake Animation */
 @keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25%,
-  75% {
-    transform: translateX(-5px);
-  }
-  50% {
-    transform: translateX(5px);
-  }
+  0%, 100% { transform: translateX(0); }
+  25%, 75% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
 }
 
 .shake {
   animation: shake 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

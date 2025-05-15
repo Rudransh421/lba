@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { FaFileAlt } from "react-icons/fa";
+import Toast from "./Toast"; // ✅ Import Toast component
 import "./FileUploader.css";
 
 const FileUploader = () => {
@@ -10,7 +11,9 @@ const FileUploader = () => {
   const [stepsVisible, setStepsVisible] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
   const [role, setRole] = useState("");
-  const [error, setError] = useState(""); // ✅ NEW
+  const [error, setError] = useState("");
+  const [backendResponse, setBackendResponse] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const steps = [
     "Accessing the document...",
@@ -21,7 +24,7 @@ const FileUploader = () => {
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setUploaded(false);
-    setError(""); // 🔄 UPDATED: clear error on new file selection
+    setError("");
   };
 
   const handleUpload = async () => {
@@ -34,16 +37,15 @@ const FileUploader = () => {
     }
 
     if (!role.trim()) {
-      setError("Please enter your desired role before uploading."); // ✅ NEW: role validation
+      setError("Please enter your desired role before uploading.");
       return;
     }
 
     setUploading(true);
     setStepsVisible(true);
     setStepIndex(0);
-    setError(""); // ✅ NEW: clear any previous error
+    setError("");
 
-    // Simulate step completion
     let interval = setInterval(() => {
       setStepIndex((prev) => {
         if (prev === steps.length - 1) {
@@ -62,12 +64,21 @@ const FileUploader = () => {
       formData.append("role", role);
       formData.append("file", file);
 
-      await axios.post("http://localhost:8000/user/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post(
+        "http://localhost:8000/user/upload",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      const msg = response.data.pythonResult || "Upload successful!";
+      setBackendResponse(msg);
+
+      setShowToast(true); // Show the toast on success
     } catch (error) {
       console.error("Upload failed:", error);
-      setError("Upload failed. Please try again."); // ✅ NEW: generic error fallback
+      setError("Upload failed. Please try again.");
       setUploading(false);
       setUploaded(false);
       setStepsVisible(false);
@@ -81,29 +92,36 @@ const FileUploader = () => {
     setStepsVisible(false);
     setStepIndex(0);
     setRole("");
-    setError(""); // ✅ NEW: reset error on reset
+    setError("");
+    setBackendResponse("");
+    setShowToast(false);
+  };
+
+  const closeToast = () => {
+    setShowToast(false); // Close the toast when the cross button is clicked
   };
 
   return (
     <div className="container">
-      <div className="role-input-container">
-        <label htmlFor="role">Enter Your Desired Role:</label>
-        <input
-          type="text"
+      <div className={`role-input-container ${uploading ? "move-left" : ""}`}>
+        <label htmlFor="role">Select Your Desired Role:</label>
+        <select
           id="role"
           value={role}
           onChange={(e) => setRole(e.target.value)}
-          placeholder="e.g., Frontend Developer"
           className="role-input"
-        />
+        >
+          <option value="">-- Select a Role --</option>
+          <option value="UX/UI Designer">UX/UI Designer</option>
+          <option value="Product Manager">Product Manager</option>
+          <option value="DevOps Engineer">DevOps Engineer</option>
+          <option value="Software Engineer">Software Engineer</option>
+          <option value="Data Engineer">Data Engineer</option>
+          <option value="Web Developer">Web Developer</option>
+          <option value="Data Scientist">Data Scientist</option>
+          <option value="AI/ML Developer">AI/ML Developer</option>
+        </select>
       </div>
-
-      {/* 🔁 MODIFIED: show only if role and upload are done */}
-      {uploaded && role && (
-        <div className="uploaded-role">
-          Role submitted: <strong>{role}</strong>
-        </div>
-      )}
 
       <div className={`upload-box ${uploading ? "move-left" : ""}`}>
         <input type="file" id="file-input" onChange={handleFileChange} />
@@ -131,7 +149,6 @@ const FileUploader = () => {
         {uploaded && <div className="success">Uploaded!</div>}
       </div>
 
-      {/* 🔁 MODIFIED: show Upload button always unless uploaded */}
       {!uploaded && (
         <>
           <button
@@ -142,7 +159,6 @@ const FileUploader = () => {
             {uploading ? "Uploading..." : "Upload"}
           </button>
 
-          {/* ✅ NEW: Show error below Upload button */}
           {error && (
             <div className="text-red-600 font-semibold mt-2">
               <span>{error}</span>
@@ -154,12 +170,14 @@ const FileUploader = () => {
         </>
       )}
 
-      {/* 🔁 MODIFIED: Show "Upload Another File" only if upload succeeded and role provided */}
       {uploaded && role && (
         <button className="upload-btn reset-btn" onClick={resetUpload}>
           Upload Another File
         </button>
       )}
+
+      {/* Show the Toast component when necessary */}
+      {showToast && <Toast message={backendResponse} onClose={closeToast} />}
     </div>
   );
 };

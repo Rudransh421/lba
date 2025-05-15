@@ -1,0 +1,165 @@
+/* Base Toast Container */
+.toast-success {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 32px;
+  width: 95%;
+  max-width: 100vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: auto; /* ✅ KEEP horizontal scroll */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeInUp 0.5s ease;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  display: flex;
+  text-align: left; /* ✅ Added for left-alignment */
+  align-items: flex-start; /* ✅ Align content to top-left */
+}
+
+/* .toast-success::-webkit-scrollbar {
+  display: none;
+} */
+
+/* Close Button */
+.toast-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: #1a2a49;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  line-height: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.toast-close:hover {
+  background: #0077ff;
+  transform: scale(1.05);
+}
+
+/* Content Structure */
+.toast-content {
+  overflow-y: auto;
+  padding-right: 16px;
+}
+
+/* Typography */
+.toast-message {
+  color: #1A2A49;
+  text-align: left; /* ✅ Ensure left alignment */
+  word-wrap: break-word;
+  overflow-x: auto; /* ✅ KEEP horizontal scroll for large content */
+}
+
+.toast-message h1,
+.toast-message h2,
+.toast-message h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  background: linear-gradient(90deg, #1A2A49, #0077fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.toast-message p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: normal !important;
+  width: 100%;          
+  max-width: 100%;
+}
+
+/* List Styling */
+.toast-message ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0;
+}
+
+.toast-message li {
+  padding-left: 28px;
+  margin-bottom: 16px;
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #4a5568;
+}
+
+.toast-message li::before {
+  content: '✔';
+  color: #00C48C;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.1rem;
+}
+
+/* Highlight Styles */
+.toast-message .keyword {
+  font-weight: bold;
+  color: #1A2A49;
+  background: #e8f0fe;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border-left: 3px solid #0077ff;
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.toast-message .highlight {
+  background: #fff7c3;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #b7791f;
+}
+
+/* ✅ Support for large code or pre blocks */
+.toast-message pre,
+.toast-message code,
+.toast-message table {
+  overflow-x: auto;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .toast-success {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

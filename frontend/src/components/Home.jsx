@@ -94,9 +94,6 @@ function Home() {
       </nav>
 
       <section ref={sections.Home} className="section home">
-        <div>
-          <h2 className="section-header">Resume Enhancer</h2>
-        </div>
         <HomeSection />
       </section>
       <div className="section-wrapper">
