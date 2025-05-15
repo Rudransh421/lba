@@ -94,7 +94,6 @@ The repository is organized into three main directories:
 1. Upload your current resume in PDF or DOCX format.
 2. Paste the job description you're targeting.
 3. Receive tailored suggestions to optimize your resume content.
-4. Download the enhanced resume for your applications.
 
 ## 👥 Team Members
 
