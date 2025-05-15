@@ -34,6 +34,11 @@ const Signup = () => {
       }
     } catch (error) {
       const backendMessage = error.response?.data?.message;
+<<<<<<< HEAD
+=======
+      console.log(error.response)
+      console.log(backendMessage)
+>>>>>>> 73c0669434d90d657caf66e434e0694b8ffc8531
       setErrorMessage(backendMessage || "Something went wrong.");
     }
   };

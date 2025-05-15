@@ -14,6 +14,11 @@ from nltk.tokenize import word_tokenize
 from google import genai
 import sys
 
+<<<<<<< HEAD
+=======
+# Download required NLTK data silently
+
+>>>>>>> 73c0669434d90d657caf66e434e0694b8ffc8531
 class DocumentProcessor:
     def __init__(self, input_file=None, gemini_api=None):
         # Initialize with file path if provided
@@ -293,9 +298,12 @@ class DocumentProcessor:
         3. Formatting and presentation suggestions
         4. Content improvements
         5. Additional tips specific to the {job_role} role
+<<<<<<< HEAD
         
         
         Make sure one thing that you return the output data in as HTML code to easier rendering 
+=======
+>>>>>>> 73c0669434d90d657caf66e434e0694b8ffc8531
         """
         
         try:
@@ -361,9 +369,12 @@ def main():
         print("="*50)
         print(gemini_output)
         
+<<<<<<< HEAD
         with open(output_file, 'w') as file:
             file.write(gemini_output)
         
+=======
+>>>>>>> 73c0669434d90d657caf66e434e0694b8ffc8531
     except Exception as e:
         print(f"Error: {str(e)}")
 
