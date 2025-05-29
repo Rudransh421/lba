@@ -127,7 +127,7 @@ function Home() {
 
       <section ref={sections.Logout} className="section logout">
         <div className="footer-container">
-          <div className="contact-details">
+          {/* <div className="contact-details">
             <h2>Contact Me</h2>
             <p>
               <strong>Phone:</strong> +91 98765 43210
@@ -155,6 +155,93 @@ function Home() {
                 github.com/sudip-dash
               </a>
             </p>
+          </div> */}
+          <div className="contact-details">
+            <div className="contact-card">
+              <h2>Rudransh Dash</h2>
+              <p>
+                GitHub:{" "}
+                <a
+                  href="https://github.com/Rudransh421"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  github.com/Rudransh421
+                </a>
+              </p>
+              <p>
+                LinkedIn:{" "}
+                <a
+                  href="https://linkedin.com/in/rudransh-dash-96b9b6259"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  linkedin.com/in/rudransh-dash-96b9b6259
+                </a>
+              </p>
+            </div>
+
+            <div className="contact-card">
+              <h2>Sriom Dash</h2>
+              <p>
+                GitHub:{" "}
+                <a
+                  href="https://github.com/SriomDash"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  github.com/SriomDash
+                </a>
+              </p>
+              <p>
+                LinkedIn:{" "}
+                <a
+                  href="https://linkedin.com/in/contact-sriom-dash"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  linkedin.com/in/contact-sriom-dash
+                </a>
+              </p>
+            </div>
+
+            <div className="contact-card">
+              <h2>Sudip Dash</h2>
+              <p>
+                GitHub:{" "}
+                <a
+                  href="https://github.com/sudip-dash"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  github.com/sudip-dash
+                </a>
+              </p>
+              <p>
+                LinkedIn:{" "}
+                <a
+                  href="https://linkedin.com/in/sudip-dash-3b4419259"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  linkedin.com/in/sudip-dash-3b4419259
+                </a>
+              </p>
+            </div>
+
+            <div className="contact-card">
+              <h2>Asutosh Sadangi</h2>
+              <p>
+                LinkedIn:{" "}
+                <a
+                  href="https://linkedin.com/in/ashutosh-sadangi-0199752a5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  linkedin.com/in/ashutosh-sadangi-0199752a5
+                </a>
+              </p>
+            </div>
           </div>
 
           <div id="copyright" align="center">
