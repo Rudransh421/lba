@@ -94,17 +94,16 @@ The repository is organized into three main directories:
 1. Upload your current resume in PDF or DOCX format.
 2. Paste the job description you're targeting.
 3. Receive tailored suggestions to optimize your resume content.
-4. Download the enhanced resume for your applications.
 
 ## 👥 Team Members
-
-- **Sriom Dash** – ML Developer  
-  GitHub: [SriomDash](https://github.com/SriomDash)  
-  LinkedIn: [contact-sriom-dash](https://www.linkedin.com/in/contact-sriom-dash)
 
 - **Rudransh Dash** – Backend Developer  
   GitHub: [Rudransh421](https://github.com/Rudransh421)  
   LinkedIn: [rudransh-dash-96b9b6259](https://www.linkedin.com/in/rudransh-dash-96b9b6259/)
+  
+- **Sriom Dash** – ML Developer  
+  GitHub: [SriomDash](https://github.com/SriomDash)  
+  LinkedIn: [contact-sriom-dash](https://www.linkedin.com/in/contact-sriom-dash)
 
 - **Sudip Dash** – Frontend Developer  
   GitHub: [sudip-dash](https://github.com/sudip-dash)  
