@@ -3,6 +3,7 @@ import {
   changePassword,
   loginUser,
   logoutUser,
+  noNeedToLogin,
   registerUser,
   resetPassword,
   sendPasswordResetLink,
@@ -13,6 +14,7 @@ import { uploadFile } from "../controller/upload.controller.js";
 
 const router = Router();
 
+router.route("/").get(noNeedToLogin)
 router.route("/signup").post(registerUser);
 router.route("/login").post(loginUser);
 router.route("/logout").post(verifyJwt, logoutUser);

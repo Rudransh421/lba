@@ -4,8 +4,7 @@ import bcrypt from "bcryptjs";
 import { User } from "../model/user.model.js";
 import { ApiError } from "../utilities/ApiError.js";
 import { ApiResponse } from "../utilities/ApiResponse.js";
-import { PDFDocument } from "pdf-lib";
-import path from "path";
+import jwt from 'jsonwebtoken'
 
 const option = {
   httpOnly: true,
@@ -41,7 +40,6 @@ const registerUser = async (req, res) => {
         .status(400)
         .json(new ApiError(400, "Please provide a valid email address"));
     }
-    
 
     if (password.length < 6) {
       return res
@@ -92,7 +90,6 @@ const loginUser = async (req, res) => {
         .status(400)
         .json(new ApiError(400, "Please provide a valid email address"));
     }
-    
 
     if (password.length < 6) {
       return res
@@ -166,7 +163,7 @@ const sendPasswordResetLink = async (req, res) => {
         .status(400)
         .json(new ApiError(400, "Please provide a valid email address"));
     }
-    
+
     console.log(`✅ Email received: ${email}`);
 
     // Step 2: Find the user in the database
@@ -294,7 +291,6 @@ const changePassword = async (req, res) => {
         .status(400)
         .json(new ApiError(400, "Please provide a valid email address"));
     }
-    
 
     const user = await User.findOne({ email });
 
@@ -325,6 +321,59 @@ const changePassword = async (req, res) => {
   }
 };
 
+const noNeedToLogin = async (req, res) => {
+  try {
+    const token = req.cookies.refreshToken;
+  
+    if (!token) {
+      res.status(401).json(new ApiResponse(401, "User is loging first time"));
+    }
+  
+    console.log(token)
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+    } catch (err) {
+      console.log('isOldUser try-catch error: ',err)
+      return res
+        .status(401)
+        .json(new ApiResponse(401,null, "Token expired or invalid"));
+    }
+  
+    console.log(decodedToken)
+    const user = await User.findById(decodedToken._id);
+
+    if(!user){
+      console.log('cannot find user using refresh token')
+    }else{
+      console.log(user)
+    }
+  
+    const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
+      user._id
+    );
+  
+    if (accessToken?.error) {
+      return res.status(500).json(new ApiError(500, accessToken.error));
+    }
+  
+    console.log('backend logic of no need to login works fine')
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, option)
+      .cookie("refreshToken", refreshToken, option)
+      .json(
+        new ApiResponse(
+          200,
+          { user, accessToken },
+          "User logged in successfully through refresh token"
+        )
+      );
+  } catch (error) {
+    console.log('In no need to login: ',error)
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -332,4 +381,5 @@ export {
   sendPasswordResetLink,
   resetPassword,
   changePassword,
+  noNeedToLogin,
 };

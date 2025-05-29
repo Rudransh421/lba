@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate, replace } from "react-router-dom";
 import axios from "axios";
 import PasswordInput from "./PasswordInput.jsx";
+import { useEffect } from "react";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -40,6 +41,29 @@ const Signup = () => {
       setErrorMessage(backendMessage || "Something went wrong.");
     }
   };
+
+  useEffect(()=>{
+     const checkUser = async () =>{
+      try {
+        const response = await axios.get("http://localhost:8000/user/",{withCredentials:true});
+        console.log(response)
+
+        const {user, accessToken} = response.data.data;
+        if (user && accessToken){
+          localStorage.setItem("accessToken", accessToken);
+          localStorage.setItem("currentlyLoggedIn", true);
+          navigate('/Home',{replace:true})
+        }
+      } catch (error) {
+        console.log(
+          "error in noLogin :",
+          error.data?.data?.message || error.message
+        );
+      }
+     }
+
+     checkUser()
+  },[])
 
   return (
     <div style={styles.container}>
